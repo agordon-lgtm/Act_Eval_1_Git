@@ -40,11 +40,10 @@
       cursor: pointer;
       font-weight: 600;
     }
-
     /* Colores iniciales (se ajustarán en la actividad) */
-    #btnAdd { background-color: #2e7d32; color: white; } /* verde */
-    #btnDel { background-color: #c62828; color: white; } /* rojo */
-    #btnEdit { background-color: #1565c0; color: white; } /* azul */
+    #btnAdd { background-color: #c62828; color: white; } /* verde */
+    #btnDel { background-color: #1565c0; color: white; } /* rojo */
+    #btnEdit { background-color:#2e7d32 ; color: white; } /* azul */
 
     ul {
       list-style: none;
@@ -116,7 +115,22 @@
       el.className = type;
       el.textContent = message;
     }
+    function addTask() {
+      const text = readInputTrimmed();
+      if (!text) {
+        setStatus("No puedes añadir una tarea vacía.", "danger");
+        return;
+      }
+      tasks.push({ 
+        id: nextId++, 
+        text: text, 
+        done: false 
+    });
 
+      clearInput();
+      setStatus("Tarea añadida correctamente.", "ok");
+      render();
+    }
     function render() {
       const list = document.getElementById("taskList");
       list.innerHTML = "";
